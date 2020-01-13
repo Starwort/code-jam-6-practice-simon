@@ -1,0 +1,57 @@
+#:kivy 1.11.1
+
+
+<StartScreen>:
+    name: "start"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: "Simon Clone"
+            font_size: sp(48)
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 0.7, 0.3
+            padding: dp(10)
+            spacing: dp(48)
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            StartButton:
+                text: "Start"
+                on_press: app.screenmanager.current = "game"
+            StartButton:
+                text: "Exit"
+                on_press: quit()
+
+
+<GameScreen>:
+    name: "game"
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(12)
+        spacing: dp(12)
+        GridLayout:
+            cols: 2
+            spacing: dp(6)
+            SimonButton:
+                background_color: 212/255, 170/255, 0, 1
+            SimonButton:
+                background_color: 0, 67/255, 171/255, 1
+            SimonButton:
+                background_color: 170/255, 0, 0, 1
+            SimonButton:
+                background_color: 68/255, 170/255, 0, 1
+        StartButton:
+            text: "Back"
+            on_press: app.screenmanager.current = "start"
+
+
+
+<SimonButton@Button>:
+    background_normal: ""
+
+
+<StartButton@Button>:
+    size_hint_y: None
+    height: dp(48)
