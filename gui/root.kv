@@ -27,6 +27,10 @@
 
 <GameScreen>:
     name: "game"
+    top_left: top_left
+    top_right: top_right
+    bottom_left: bottom_left
+    bottom_right: bottom_right
     BoxLayout:
         orientation: "vertical"
         padding: dp(12)
@@ -35,12 +39,16 @@
             cols: 2
             spacing: dp(6)
             SimonButton:
+                id: top_left
                 background_color: 212/255, 170/255, 0, 1
             SimonButton:
+                id: top_right
                 background_color: 0, 67/255, 171/255, 1
             SimonButton:
+                id: bottom_left
                 background_color: 170/255, 0, 0, 1
             SimonButton:
+                id: bottom_right
                 background_color: 68/255, 170/255, 0, 1
         StartButton:
             text: "Back"
