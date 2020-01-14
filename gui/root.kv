@@ -41,15 +41,19 @@
             SimonButton:
                 id: top_left
                 background_color: 212/255, 170/255, 0, 1
+                on_press: root.yellow_press()
             SimonButton:
                 id: top_right
                 background_color: 0, 67/255, 171/255, 1
+                on_press: root.blue_press()
             SimonButton:
                 id: bottom_left
                 background_color: 170/255, 0, 0, 1
+                on_press: root.red_press()
             SimonButton:
                 id: bottom_right
                 background_color: 68/255, 170/255, 0, 1
+                on_press: root.green_press()
         StartButton:
             text: "Back"
             on_press: app.screenmanager.current = "start"
