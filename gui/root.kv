@@ -35,21 +35,39 @@
             cols: 2
             spacing: dp(6)
             SimonButton:
+                id: top_left
                 background_color: 212/255, 170/255, 0, 1
+                angle: -90, 0
             SimonButton:
+                id: top_right
                 background_color: 0, 67/255, 171/255, 1
+                angle: 0, 90
             SimonButton:
+                id: bottom_left
                 background_color: 170/255, 0, 0, 1
+                angle: 180, 270
             SimonButton:
+                id: bottom_right
                 background_color: 68/255, 170/255, 0, 1
+                angle: 90, 180
         StartButton:
             text: "Back"
             on_press: app.screenmanager.current = "start"
 
 
-
-<SimonButton@Button>:
-    background_normal: ""
+<SimonButton>:
+    canvas:
+        Color:
+            rgba: [x / 2 for x in self.background_color]
+        Rectangle:
+            size: self.size
+            pos: self.pos
+        Color:
+            rgba: self.background_color
+        Line:
+            width: 35
+            cap: "none"
+            circle: self.parent.center_x, self.parent.center_y, self.radius , self.start_angle, self.end_angle
 
 
 <StartButton@Button>:
