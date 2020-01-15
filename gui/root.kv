@@ -32,6 +32,14 @@
         orientation: "vertical"
         padding: dp(12)
         spacing: dp(12)
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: sp(20)
+            SimonLabel:
+                text: "Score: "
+            SimonLabel:
+                text: str(root.score)
         GridLayout:
             cols: 2
             spacing: dp(6)
@@ -57,9 +65,11 @@
 
 
 
-<SimonButton@Button>:
+<SimonButton>:
     background_normal: ""
 
+<SimonLabel@Label>:
+    font_size: sp(20)
 
 <StartButton@Button>:
     size_hint_y: None
