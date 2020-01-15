@@ -1,6 +1,7 @@
 from random import randint
 
-class SimonSays:
+
+class Simon:
     def __init__(self, *args, **kwargs):
         self.moves = []
 
@@ -9,8 +10,6 @@ class SimonSays:
             return True
         else:
             return False
-    
+
     def add_press(self):
         self.moves.append(randint(1, 4))
-
-    

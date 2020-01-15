@@ -1,10 +1,8 @@
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.uix.screenmanager import ScreenManager
 
-from gui.root import StartScreen, GameScreen
-
+from gui.root import GameScreen, StartScreen
 
 Builder.load_file("gui/root.kv")
 
@@ -14,8 +12,6 @@ class SimonApp(App):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        interface = ObjectProperty(None)
 
         self.StartScreen = StartScreen()
         self.GameScreen = GameScreen()
