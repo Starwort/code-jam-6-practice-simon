@@ -22,7 +22,7 @@ class GameScreen(Screen):
 
     buttons_list = ListProperty()
     score = NumericProperty()
-    move_index = 0
+    move_index = NumericProperty()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -32,8 +32,7 @@ class GameScreen(Screen):
         self.bind(on_enter=lambda _: self.show_sequence())
 
     def reset(self):
-        self.move_index = 0
-        self.score = 0
+        self.move_index = self.score = 0
         self.api.moves = []
         Clock.schedule_once(lambda _: self.show_sequence(), 0.5)
 
@@ -44,7 +43,7 @@ class GameScreen(Screen):
             if self.move_index >= len(self.api.moves):
                 Clock.schedule_once(lambda _: self.show_sequence(), 0.5)
         else:
-            print("Wrong!")
+            self.api.play_sound("wrong")
             self.reset()
 
     def button_press(self, number):
@@ -52,7 +51,8 @@ class GameScreen(Screen):
             self.check_sequence(number)
 
     def flash_button(self, button, i):
-        print(self.buttons_list.index(button) + 1, self.api.moves)
+        self.api.play_sound('beep' + str(self.buttons_list.index(button) + 1))
+
         anim = Animation(opacity=0.5, d=0.1) + Animation(opacity=1, d=0.1)
         anim.start(button)
 
