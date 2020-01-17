@@ -6,16 +6,16 @@ class Simon:
     def __init__(self, *args, **kwargs):
         self.moves = []
         self.sounds = {
-            'beep1': SoundLoader.load("assets/sound/beep1.wav"),
-            'beep2': SoundLoader.load("assets/sound/beep2.wav"),
-            'beep3': SoundLoader.load("assets/sound/beep3.wav"),
-            'beep4': SoundLoader.load("assets/sound/beep4.wav"),
-            'wrong': SoundLoader.load("assets/sound/wrong.wav")
+            "beep1": SoundLoader.load("assets/sound/beep1.wav"),
+            "beep2": SoundLoader.load("assets/sound/beep2.wav"),
+            "beep3": SoundLoader.load("assets/sound/beep3.wav"),
+            "beep4": SoundLoader.load("assets/sound/beep4.wav"),
+            "wrong": SoundLoader.load("assets/sound/wrong.wav"),
         }
 
     def validate(self, _input: list, index: int):
         if _input == self.moves[index]:
-            self.play_sound('beep' + str(_input))
+            self.play_sound("beep" + str(_input))
             return True
         return False
 

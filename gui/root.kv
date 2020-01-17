@@ -8,33 +8,65 @@
         orientation: "vertical"
 
         Label:
+            size_hint_y: 0.5
             text: "Simon Clone"
             font_size: sp(48)
 
         BoxLayout:
             orientation: "vertical"
-            size_hint: 0.7, 0.3
-            padding: dp(10)
+            size_hint: 0.7, 1 
+            padding: dp(24)
             spacing: dp(48)
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             StartButton:
-                text: "Start"
+                text: "Play"
                 on_press: app.screenmanager.current = "game"
+            StartButton:
+                text: "High Scores"
+                on_press: app.screenmanager.current = "scores"
             StartButton:
                 text: "Exit"
                 on_press: quit()
 
+
+<ScoreScreen>:
+    name: "scores"
+    BoxLayout:
+        orientation: "vertical"
+        StartButton:
+            text: "Back"
+            on_press: app.screenmanager.current = "start"
+        Label:
+            size_hint_y: None
+            text: "High Scores"
+            font_size: dp(24)
+        RecycleView:
+            viewclass: "Label"
+            data: [{"text": score["name"] + ": " + score["score"]} for score in root.scores]
+            scroll_type: ["content", "bars"]
+            bar_color: 1, 1, 1, 1
+            RecycleBoxLayout:
+                orientation: "vertical"
+                default_size: None, dp(48)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(10)
+                padding: dp(10)
 
 <GameScreen>:
     buttons_list: (top_left, top_right, bottom_left, bottom_right)
     name: "game"
     BoxLayout:
         orientation: "vertical"
-        padding: dp(12)
         spacing: dp(12)
+        StartButton:
+            text: "Back"
+            on_press: app.screenmanager.current = "start"
         BoxLayout:
             orientation: "horizontal"
             size_hint_y: None
+            padding: dp(12)
             height: sp(20)
             SimonLabel:
                 text: "Score: "
@@ -43,30 +75,29 @@
         GridLayout:
             cols: 2
             spacing: dp(6)
+            padding: dp(12)
             SimonButton:
                 id: top_left
                 background_color: 212/255, 170/255, 0, 1
-                on_press: root.button_press(1)
+                index: 1
             SimonButton:
                 id: top_right
                 background_color: 0, 67/255, 171/255, 1
-                on_press: root.button_press(2)
+                index: 2
             SimonButton:
                 id: bottom_left
                 background_color: 170/255, 0, 0, 1
-                on_press: root.button_press(3)
+                index: 3
             SimonButton:
                 id: bottom_right
                 background_color: 68/255, 170/255, 0, 1
-                on_press: root.button_press(4)
-        StartButton:
-            text: "Back"
-            on_press: app.screenmanager.current = "start"
+                index: 4
 
 
 
 <SimonButton>:
     background_normal: ""
+    background_down: ""
 
 <SimonLabel@Label>:
     font_size: sp(20)
@@ -74,3 +105,15 @@
 <StartButton@Button>:
     size_hint_y: None
     height: dp(48)
+
+<LosePopup>:
+    title: "Game Over"
+    size_hint: 0.8, 0.5
+    on_dismiss: app.GameScreen.reset()
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            text: "Your Score: " + str(app.GameScreen.score)
+        StartButton:
+            text: "Back"
+            on_press: root.dismiss()
